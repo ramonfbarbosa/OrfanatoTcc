@@ -4,5 +4,5 @@ namespace OrfanatoAPI.Repositories;
 
 public interface IImagensRepository
 {
-    Task<Imagens> CreateImagensAsync(Imagens novasImagens);
+    Task CreateImagensAsync(List<OrfanatoImagem> novasImagens);
 }

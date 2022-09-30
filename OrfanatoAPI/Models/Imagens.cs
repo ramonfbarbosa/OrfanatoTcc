@@ -1,17 +1,15 @@
 ﻿namespace OrfanatoAPI.Models;
 
-public class Imagens
+public class OrfanatoImagem
 {
     public int Id { get; set; }
     public string ImagemUrl { get; set; }
-    public virtual Orfanato Orfanato { get; set; }
     public int OrfanatoId { get; set; }
 
-    public Imagens() { }
+    public OrfanatoImagem() { }
 
-    public Imagens(int id, string caminho, int orfanatoId)
+    public OrfanatoImagem(string caminho, int orfanatoId)
     {
-        Id = id;
         ImagemUrl = caminho;
         OrfanatoId = orfanatoId;
     }

@@ -7,7 +7,7 @@ namespace OrfanatoAPI.Context;
 public class OrfanatoContext : DbContext
 {
     public DbSet<Orfanato> Orfanatos { get; set; }
-    public DbSet<Imagens> Imagens { get; set; }
+    public DbSet<OrfanatoImagem> Imagens { get; set; }
 
     public OrfanatoContext(DbContextOptions<OrfanatoContext> options) : base(options) { }
 

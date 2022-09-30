@@ -4,14 +4,14 @@ using OrfanatoAPI.Models;
 
 namespace OrfanatoAPI.Mapping;
 
-public class ImagensMap : IEntityTypeConfiguration<Imagens>
+public class ImagensMap : IEntityTypeConfiguration<OrfanatoImagem>
 {
-    public void Configure(EntityTypeBuilder<Imagens> builder)
+    public void Configure(EntityTypeBuilder<OrfanatoImagem> builder)
     {
         builder.ToTable("TAB_IMAGENS");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).HasColumnName("ID_IMAGENS").HasColumnType("INT");
         builder.Property(x => x.ImagemUrl).HasColumnName("IMAGEM_URL").HasColumnType("VARCHAR(MAX)");
-        builder.HasOne(x => x.Orfanato).WithMany(x => x.Imagens).HasForeignKey(x => x.OrfanatoId);
+        builder.Property(x => x.OrfanatoId).HasColumnName("ORFANATO_ID").HasColumnType("INT");
     }
 }

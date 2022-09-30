@@ -7,9 +7,6 @@ public class OrfanatoValidator : AbstractValidator<Orfanato>
 {
     public OrfanatoValidator()
     {
-        RuleFor(x => x.Id)
-            .NotEqual(0)
-            .WithMessage("O id não pode ser nulo!");
         RuleFor(x => x.Nome)
             .NotEmpty()
             .WithMessage("O campo nome não pode ficar vazio!")
@@ -40,12 +37,5 @@ public class OrfanatoValidator : AbstractValidator<Orfanato>
             .WithMessage("O campo hora de abertura não pode ficar vazio!")
             .NotNull()
             .WithMessage("O campo hora de abertura não pode ser nulo!");
-        RuleFor(x => x.AbertoFimDeSemana)
-            .Equal(true || false);
-        RuleFor(x => x.Imagens)
-            .NotEmpty()
-            .WithMessage("O campo imagens não pode ficar vazio!")
-            .NotNull()
-            .WithMessage("O campo imagens não pode ser nulo!");
     }
 }

@@ -13,17 +13,34 @@ public class OrfanatoRepository : IOrfanatoRepository
         OrfanatoContext = orfanatoContext;
     }
 
+    private IQueryable<Orfanato> OrfanatosWithIncludes =>
+           OrfanatoContext.Orfanatos.Include(x => x.Imagens);
+
     public List<Orfanato> GetAll() =>
-            OrfanatoContext.Orfanatos.ToList();
+            OrfanatosWithIncludes.ToList();
 
     public Orfanato GetById(int id) =>
-            OrfanatoContext.Orfanatos.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            OrfanatosWithIncludes.AsNoTracking().FirstOrDefault(x => x.Id == id);
 
     public async Task<Orfanato> CreateAsync(Orfanato novoOrfanato)
     {
-        OrfanatoContext.Add(novoOrfanato);
-        await OrfanatoContext.SaveChangesAsync();
-        return novoOrfanato;
+        using var transaction = OrfanatoContext.Database.BeginTransaction();
+        try
+        {
+            var proxy = OrfanatoContext.Orfanatos.Add(novoOrfanato);
+            await OrfanatoContext.SaveChangesAsync();
+            transaction.Commit();
+            return proxy.Entity;
+        }
+        catch (Exception)
+        {
+            try
+            {
+                transaction.Rollback();
+            }
+            catch (Exception) { }
+            throw;
+        }
     }
 
     public async Task<Orfanato> UpdateAtivo(Orfanato orfanatoAtualizado)

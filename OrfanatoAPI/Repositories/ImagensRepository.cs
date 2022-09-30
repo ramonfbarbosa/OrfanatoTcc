@@ -12,10 +12,23 @@ public class ImagensRepository : IImagensRepository
         OrfanatoContext = orfanatoContext;
     }
 
-    public async Task<Imagens> CreateImagensAsync(Imagens novasImagens)
+    public async Task CreateImagensAsync(List<OrfanatoImagem> novasImagens)
     {
-        OrfanatoContext.Add(novasImagens);
-        await OrfanatoContext.SaveChangesAsync();
-        return novasImagens;
+        using var transaction = OrfanatoContext.Database.BeginTransaction();
+        try
+        {
+            OrfanatoContext.Imagens.AddRange(novasImagens);
+            await OrfanatoContext.SaveChangesAsync();
+            transaction.Commit();
+        }
+        catch (Exception)
+        {
+            try
+            {
+                transaction.Rollback();
+            }
+            catch (Exception) { }
+            throw;
+        }
     }
 }

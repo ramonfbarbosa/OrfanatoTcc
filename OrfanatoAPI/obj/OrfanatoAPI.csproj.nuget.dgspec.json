@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ramon.fernandes\\source\\repos\\OrfanatoAPI\\OrfanatoAPI\\OrfanatoAPI.csproj": {}
+    "C:\\Users\\ramon\\projects\\OrfanatoTcc\\OrfanatoAPI\\OrfanatoAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ramon.fernandes\\source\\repos\\OrfanatoAPI\\OrfanatoAPI\\OrfanatoAPI.csproj": {
+    "C:\\Users\\ramon\\projects\\OrfanatoTcc\\OrfanatoAPI\\OrfanatoAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ramon.fernandes\\source\\repos\\OrfanatoAPI\\OrfanatoAPI\\OrfanatoAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ramon\\projects\\OrfanatoTcc\\OrfanatoAPI\\OrfanatoAPI.csproj",
         "projectName": "OrfanatoAPI",
-        "projectPath": "C:\\Users\\ramon.fernandes\\source\\repos\\OrfanatoAPI\\OrfanatoAPI\\OrfanatoAPI.csproj",
-        "packagesPath": "C:\\Users\\ramon.fernandes\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ramon.fernandes\\source\\repos\\OrfanatoAPI\\OrfanatoAPI\\obj\\",
+        "projectPath": "C:\\Users\\ramon\\projects\\OrfanatoTcc\\OrfanatoAPI\\OrfanatoAPI.csproj",
+        "packagesPath": "C:\\Users\\ramon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ramon\\projects\\OrfanatoTcc\\OrfanatoAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ramon.fernandes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ramon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,7 +54,15 @@
               "target": "Package",
               "version": "[6.0.9, )"
             },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
             "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.9, )"
             },
