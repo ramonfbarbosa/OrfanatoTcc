@@ -21,10 +21,10 @@ export default function SignIn() {
         data.append('email', email);
         data.append('password', password);
 
-        await api.post('/sign-in', data, {
-        }).then(response => {
-
-        });
+        await api.post('/sign-in', data)
+            .then(res => {
+                setSignIn(res.data)
+            });
         alert('Logado com sucesso!');
         history.push('/app');  //trocar
     }

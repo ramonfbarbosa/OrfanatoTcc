@@ -19,19 +19,19 @@ public class OrphanagesController : Controller
     }
 
     [HttpGet("orphanages/{orfanatoId}")]
-    public ActionResult<OrfanatoDTOById> GetById(int orfanatoId) =>
+    public ActionResult<OrfanatoByIdDTO> GetById(int orfanatoId) =>
         Ok(OrfanatoService.GetById(orfanatoId));
 
     [HttpGet("orphanages")]
-    public ActionResult<List<OrfanatoDTOMap>> GetAll() =>
-         Ok(OrfanatoService.GetAll());
+    public ActionResult<List<OrfanatoMapDTO>> GetAll() =>
+         Ok(OrfanatoService.GetAllActives());
 
     [HttpPost("insert")]
     public async Task<IActionResult> InsertOrfanato([FromBody] InsertOrfanatoRequest request)
     {
         try
         {
-            var result = await OrfanatoService.CreateAsync(request);
+            var result = await OrfanatoService.InsertAsync(request);
             if (result.Sucesso)
             {
                 return Ok(result);
@@ -47,7 +47,7 @@ public class OrphanagesController : Controller
         }
     }
 
-    [HttpPost("ativar-ou-desativar")]
+    [HttpPost("toggle-orphanage")]
     public async Task<IActionResult> AtivarOuDesativarOrfanato([FromBody] UpdateAtivoRequest request)
     {
         try
@@ -75,7 +75,6 @@ public class OrphanagesController : Controller
         {
             return Ok(request);
         }
-
         catch (Exception e)
         {
             string errorMessage = $"ActiveOrDesactiveMethod error - {e.Message}";

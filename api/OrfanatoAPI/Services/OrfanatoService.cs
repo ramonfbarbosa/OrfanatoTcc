@@ -21,12 +21,12 @@ public class OrfanatoService : IOrfanatoService
         OrfanatoValidator = orfanatoValidator;
     }
 
-    public OrfanatoDTOById GetById(int id)
+    public OrfanatoByIdDTO GetById(int id)
     {
         var entity = OrfanatoRepository.GetById(id);
         var imagensDto = entity.Imagens.Select(x => new ImageDTO(x)).ToList();
 
-        return new OrfanatoDTOById
+        return new OrfanatoByIdDTO
         {
             Name = entity.Name,
             Latitude = entity.Latitude,
@@ -40,10 +40,15 @@ public class OrfanatoService : IOrfanatoService
         };
     }
 
-    public List<OrfanatoDTOMap> GetAll() =>
-        OrfanatoRepository.GetAll().Select(x => new OrfanatoDTOMap(x)).ToList();
+    public List<OrfanatoMapDTO> GetAllActives() =>
+        OrfanatoRepository
+        .GetAll()
+        .Where(x => x.Ativo is true)
+        .OrderBy(x => x.Id)
+        .Select(x => new OrfanatoMapDTO(x))
+        .ToList();
 
-    public async Task<ValidationResponse<OrfanatoDTO>> CreateAsync(InsertOrfanatoRequest request)
+    public async Task<ValidationResponse<OrfanatoDTO>> InsertAsync(InsertOrfanatoRequest request)
     {
         var orfanato = request.GetEntity();
         var imagens = request.Images.Select(x => new Image(x)).ToList();
@@ -62,25 +67,24 @@ public class OrfanatoService : IOrfanatoService
         }
     }
 
-    public async Task<AtivarOuDesativarOrfanatoResponse<Orphanage>> UpdateAtivo(UpdateAtivoRequest request)
+    public async Task<ToggleResponse<Orphanage>> UpdateAtivo(UpdateAtivoRequest request)
     {
         try
         {
             var orfanato = OrfanatoRepository.GetById(request.Id);
             if (orfanato is null)
             {
-                return AtivarOuDesativarOrfanatoResponse<Orphanage>.Invalid(new List<string> { "id não existente" });
+                return ToggleResponse<Orphanage>.Invalid(new List<string> { "id não existente" });
             }
-            else if (request.Desejo is "ativar")
+            else if (orfanato.Ativo is false)
             {
                 orfanato.Ativo = true;
+                var orfanatoAtivado = await OrfanatoRepository.UpdateAtivo(orfanato);
+                return ToggleResponse<Orphanage>.Valid(orfanatoAtivado.Id);
             }
-            else if (request.Desejo is "desativar")
-            {
-                orfanato.Ativo = false;
-            }
-            var updatedOrfanato = await OrfanatoRepository.UpdateAtivo(orfanato);
-            return AtivarOuDesativarOrfanatoResponse<Orphanage>.Valid(updatedOrfanato.Id);
+            orfanato.Ativo = false;
+            var orfanatoDesativado = await OrfanatoRepository.UpdateAtivo(orfanato);
+            return ToggleResponse<Orphanage>.Valid(orfanatoDesativado.Id);
         }
         catch (Exception)
         {

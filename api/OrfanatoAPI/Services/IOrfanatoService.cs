@@ -7,8 +7,8 @@ namespace OrfanatoAPI.Services;
 
 public interface IOrfanatoService
 {
-    OrfanatoDTOById GetById(int id);
-    List<OrfanatoDTOMap> GetAll();
-    Task<ValidationResponse<OrfanatoDTO>> CreateAsync(InsertOrfanatoRequest request);
-    Task<AtivarOuDesativarOrfanatoResponse<Orphanage>> UpdateAtivo(UpdateAtivoRequest request);
+    OrfanatoByIdDTO GetById(int id);
+    List<OrfanatoMapDTO> GetAllActives();
+    Task<ValidationResponse<OrfanatoDTO>> InsertAsync(InsertOrfanatoRequest request);
+    Task<ToggleResponse<Orphanage>> UpdateAtivo(UpdateAtivoRequest request);
 }

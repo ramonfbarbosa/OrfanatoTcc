@@ -3,7 +3,7 @@ using System.Security;
 
 namespace OrfanatoAPI.DTOs;
 
-public class OrfanatoDTOById
+public class OrfanatoByIdDTO
 {
     public string Name { get; set; }
     public decimal Latitude { get; set; }
