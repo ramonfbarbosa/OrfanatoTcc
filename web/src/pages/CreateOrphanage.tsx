@@ -59,11 +59,8 @@ export default function CreateOrphanage() {
       data.append('images', image);
     });
     
-    await api.post('/insert', data, {
-      headers: {
-        'content-type': 'application/json'
-      }
-  });
+    await api.post('/insert', data)
+    .then(res => console.log)
     alert('Orfanato cadastrado com sucesso!');
     history.push('/app');
   }

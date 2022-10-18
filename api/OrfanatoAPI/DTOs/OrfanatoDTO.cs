@@ -11,7 +11,8 @@ public class OrfanatoDTO
     public decimal Longitude { get; set; }
     public string Sobre { get; set; }
     public string Instrucoes { get; set; }
-    public string HoraDeAbertura { get; set; }
+    public string AbreAs { get; set; }
+    public string FechaAs { get; set; }
     public bool AbertoFimDeSemana { get; set; }
     public bool Ativo { get; set; }
     public List<Image> Imagens { get; set; }
@@ -27,7 +28,8 @@ public class OrfanatoDTO
         Longitude = orfanato.Longitude;
         Sobre = orfanato.About;
         Instrucoes = orfanato.Instructions;
-        HoraDeAbertura = orfanato.HoraDeAbertura;
+        AbreAs = orfanato.AbreAs;
+        FechaAs = orfanato.FechaAs;
         AbertoFimDeSemana = orfanato.AbertoFimDeSemana;
         Ativo = orfanato.Ativo;
         Imagens = orfanato.Imagens;

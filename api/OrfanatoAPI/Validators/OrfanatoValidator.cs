@@ -33,7 +33,7 @@ public class OrfanatoValidator : AbstractValidator<Orphanage>
             .WithMessage("O campo instrucoes não pode ficar vazio!")
             .NotNull()
             .WithMessage("O campo instrucoes não pode ser nulo!");
-        RuleFor(x => x.HoraDeAbertura)
+        RuleFor(x => x.AbreAs)
             .NotEmpty()
             .WithMessage("O campo hora de abertura não pode ficar vazio!")
             .NotNull()

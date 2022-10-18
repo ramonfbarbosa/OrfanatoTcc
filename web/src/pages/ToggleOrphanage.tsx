@@ -1,0 +1,50 @@
+import React, { useEffect, useState } from "react";
+import 'bootstrap/dist/css/bootstrap.css'
+import api from "../services/api";
+import { ToggleOrphanageRequest } from "../types/ToggleOrphanageRequest";
+import OrphanageCard from "../components/OrphanageCard";
+
+const ToggleOrphanage = () => {
+
+    const [orphanages, setOrphaanges] = useState<ToggleOrphanageRequest[]>([]);
+
+    useEffect(() => {
+        api.get("/orphanages").then(res => {
+            setOrphaanges(res.data);
+        });
+    }, []);
+
+    return (
+        <main>
+            <div className="container my-4">
+                <div>
+                    <h1>Ative ou desative orfanatos</h1>
+                </div>
+                <div className="card text-center">
+                    <div className="card-header">
+                        <ul className="nav nav-tabs card-header-tabs">
+                            <li className="nav-item">
+                                <a className="nav-link active" href="">Orfanatos</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="card-body">
+                        {orphanages.map((orphanage) => {
+                            return (
+                                <OrphanageCard
+                                    id={orphanage.id}
+                                    name={orphanage.name}
+                                    whatsapp={orphanage.whatsapp}
+                                    abreAs={orphanage.abreAs}
+                                    fechaAs={orphanage.fechaAs}
+                                    status={orphanage.status} />
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        </main>
+    );
+}
+
+export default ToggleOrphanage;

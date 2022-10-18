@@ -10,15 +10,14 @@ import mapIcon from '../utils/mapIcon';
 import mapMakerImg from '../images/map-marker.svg'
 
 import '../styles/pages/orphanages-map.css';
-import { AllOrphanages } from '../Types/AllOrphanages';
+import { AllOrphanages } from '../types/AllOrphanages';
 
 function OrphanagesMap() {
 
   const [orphanages, setOrphaanges] = useState<AllOrphanages[]>([]);
 
   useEffect(() => {
-    api.get("/orphanages").then(res => {
-      console.log(res.data)
+    api.get("/orphanages-map").then(res => {
       setOrphaanges(res.data);
     });
   }, []);
@@ -38,7 +37,7 @@ function OrphanagesMap() {
           <span>Rio de Janeiro</span>
         </footer>
 
-        <Link to="/signin" style={{ textDecoration: 'none' , color: 'red'}}><strong>ADMINISTRADOR </strong>
+        <Link to="/auth" style={{ textDecoration: 'none' , color: 'red'}}><strong>ADMINISTRADOR </strong>
             <FiAlertOctagon size={32} color="red" style={{marginBottom: '-9px'}}/>
         </Link>
       </aside>

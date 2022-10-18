@@ -17,9 +17,10 @@ public class OrfanatoMap : IEntityTypeConfiguration<Orphanage>
         builder.Property(x => x.Longitude).HasColumnName("LONGITUDE").HasColumnType("VARCHAR(150)");
         builder.Property(x => x.About).HasColumnName("SOBRE").HasColumnType("VARCHAR(150)");
         builder.Property(x => x.Instructions).HasColumnName("INSTRUCOES").HasColumnType("VARCHAR(150)");
-        builder.Property(x => x.HoraDeAbertura).HasColumnName("HORA_DE_ABERTURA").HasColumnType("VARCHAR(50)");
+        builder.Property(x => x.AbreAs).HasColumnName("ABRE_AS").HasColumnType("VARCHAR(5)");
+        builder.Property(x => x.FechaAs).HasColumnName("FECHA_AS").HasColumnType("VARCHAR(5)");
         builder.Property(x => x.AbertoFimDeSemana).HasColumnName("ABERTO_FIM_DE_SEMANA").HasColumnType("bit");
-        builder.Property(x => x.Ativo).HasColumnName("ATIVO").HasColumnType("bit").HasDefaultValue(1);
+        builder.Property(x => x.Ativo).HasColumnName("ATIVO").HasColumnType("bit").HasDefaultValue(0);
         builder.HasMany(x => x.Imagens).WithOne().HasForeignKey(x => x.OrfanatoId);
     }
 }

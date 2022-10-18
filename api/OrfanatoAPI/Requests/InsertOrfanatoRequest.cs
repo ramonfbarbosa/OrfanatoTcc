@@ -26,7 +26,7 @@ public class InsertOrfanatoRequest
             Longitude = Longitude,
             About = About,
             Instructions = Instructions,
-            HoraDeAbertura = OpeningHours,
+            AbreAs = OpeningHours,
             AbertoFimDeSemana = OpenOnWeekends
         };
 }

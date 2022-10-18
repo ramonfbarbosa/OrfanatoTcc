@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { OrphanageRequest } from "../Types/OrphanageRequest";
+import { OrphanageRequest } from "../types/OrphanageRequest";
 import { FiClock, FiInfo } from "react-icons/fi";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import { useParams } from 'react-router-dom';
 
 import Sidebar from "../components/SideBar";
 import mapIcon from "../utils/mapIcon";
-import { FaPhoneSquareAlt, FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp } from 'react-icons/fa';
 import api from "../services/api";
 
 import '../styles/pages/orphanage.css';
@@ -99,7 +99,8 @@ function clearAndUpper(text: string) {
               <div className="hour">
                 <FiClock size={32} color="#15B6D6" />
                 Segunda à Sexta <br />
-                {orphanage.openingHours}
+                Abre as: {orphanage.abreAs}<br />
+                Fecha as: {orphanage.fechaAs}
               </div>
 
               {orphanage.openOnWeekends ? (
@@ -117,16 +118,13 @@ function clearAndUpper(text: string) {
                 )}
 
             </div>
-            <br />
             <hr />
-            
             <a 
               type="button"
               className="contact-button"
               href={`https://api.whatsapp.com/send?l=pt_BR&phone=${orphanage.whatsapp}&text=Oi, quero conversar sobre visitas no ${orphanage.name} `}> 
               <FaWhatsapp size={50} color="green" style={{marginBottom: '-9px'}}/>
-              <h4>Chamar no whatsapp</h4> <br />
-              
+              <a className="btn btn-secondary">Chamar no whatsapp</a> <br />
             </a>
           </div>
         </div>

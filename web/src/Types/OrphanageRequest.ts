@@ -5,7 +5,8 @@ export type OrphanageRequest = {
     instructions: string;
     about: string;
     whatsapp: string,
-    openingHours: string;
+    abreAs: string;
+    fechaAs: string;
     openOnWeekends: boolean;
     images: Array<{
         id: number;

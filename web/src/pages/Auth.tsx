@@ -3,37 +3,39 @@ import { useHistory } from "react-router-dom";
 import Sidebar from "../components/SideBar";
 import api from "../services/api";
 import '../styles/pages/create-orphanage.css';
-import { SignInRequest } from "../Types/SignInRequest";
 
+type SignInRequest = {
+    email: string;
+    password: string;
+} 
 
-export default function SignIn() {
+const Auth = (signInRequest: SignInRequest) => {
     const history = useHistory();
 
-    const [signIn, setSignIn] = useState<SignInRequest>();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const credentials = {
+        email: email,
+        password: password
+    }
 
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
 
-        const data = new FormData();
-
-        data.append('email', email);
-        data.append('password', password);
-
-        await api.post('/sign-in', data)
+        console.log(credentials)
+        await api.post('/sign-in', credentials)
             .then(res => {
-                setSignIn(res.data)
+                // setSignIn(res.data)
             });
         alert('Logado com sucesso!');
-        history.push('/app');  //trocar
+        history.push('auth/toggle-orphanages');
     }
 
     return (
         <div id="page-create-orphanage">
-            <Sidebar />
-
             <main>
+                <Sidebar />
                 <form onSubmit={handleSubmit} className="create-orphanage-form">
                     <fieldset>
                         <div className="input-block">
@@ -44,7 +46,6 @@ export default function SignIn() {
                                 onChange={event => setEmail(event.target.value)}
                             />
                         </div>
-
                         <div className="input-block">
                             <label htmlFor="password">Senha</label>
                             <input
@@ -61,5 +62,9 @@ export default function SignIn() {
                 </form>
             </main >
         </div >
+
+        
     );
 }
+
+export default Auth;

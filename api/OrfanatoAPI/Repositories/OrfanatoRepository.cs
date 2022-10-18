@@ -17,7 +17,7 @@ public class OrfanatoRepository : IOrfanatoRepository
            OrfanatoContext.Orfanatos.Include(x => x.Imagens);
 
     public List<Orphanage> GetAll() =>
-            OrfanatosWithIncludes.ToList();
+            OrfanatosWithIncludes.OrderBy(x => x.Id).ToList();
 
     public Orphanage GetById(int id) =>
             OrfanatosWithIncludes.AsNoTracking().FirstOrDefault(x => x.Id == id);

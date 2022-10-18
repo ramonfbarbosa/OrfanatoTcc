@@ -9,7 +9,8 @@ public class Orphanage
     public decimal Longitude { get; set; }
     public string About { get; set; }
     public string Instructions { get; set; }
-    public string HoraDeAbertura { get; set; }
+    public string AbreAs { get; set; }
+    public string FechaAs { get; set; }
     public bool AbertoFimDeSemana { get; set; }
     public bool Ativo { get; set; }
     public virtual List<Image> Imagens { get; set; }

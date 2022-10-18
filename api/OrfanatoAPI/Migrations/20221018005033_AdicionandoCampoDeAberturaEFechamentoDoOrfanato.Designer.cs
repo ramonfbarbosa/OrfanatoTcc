@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrfanatoAPI.Context;
 
@@ -10,9 +11,10 @@ using OrfanatoAPI.Context;
 namespace OrfanatoAPI.Migrations
 {
     [DbContext(typeof(OrfanatoContext))]
-    partial class OrfanatoContextModelSnapshot : ModelSnapshot
+    [Migration("20221018005033_AdicionandoCampoDeAberturaEFechamentoDoOrfanato")]
+    partial class AdicionandoCampoDeAberturaEFechamentoDoOrfanato
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

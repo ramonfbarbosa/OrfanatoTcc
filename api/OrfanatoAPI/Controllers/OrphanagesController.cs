@@ -22,9 +22,13 @@ public class OrphanagesController : Controller
     public ActionResult<OrfanatoByIdDTO> GetById(int orfanatoId) =>
         Ok(OrfanatoService.GetById(orfanatoId));
 
-    [HttpGet("orphanages")]
+    [HttpGet("orphanages-map")]
     public ActionResult<List<OrfanatoMapDTO>> GetAll() =>
          Ok(OrfanatoService.GetAllActives());
+
+    [HttpGet("orphanages")]
+    public ActionResult<OrfanatoByIdDTO> GetAllOrphanages() =>
+        Ok(OrfanatoService.GetAllOrphanages());
 
     [HttpPost("insert")]
     public async Task<IActionResult> InsertOrfanato([FromBody] InsertOrfanatoRequest request)
@@ -48,7 +52,7 @@ public class OrphanagesController : Controller
     }
 
     [HttpPost("toggle-orphanage")]
-    public async Task<IActionResult> AtivarOuDesativarOrfanato([FromBody] UpdateAtivoRequest request)
+    public async Task<IActionResult> ToggleOrphanage([FromBody] UpdateAtivoRequest request)
     {
         try
         {

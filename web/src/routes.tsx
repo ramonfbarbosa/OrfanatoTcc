@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-import Landing from './pages/Landing';
-import OrphanagesMap from './pages/OrphanagesMap';
-import Orphanage from './pages/Orphanage';
+import Auth from './pages/Auth';
 import CreateOrphanage from './pages/CreateOrphanage';
-import SignIn from './pages/SignIn';
+import Landing from './pages/Landing';
+import Orphanage from './pages/Orphanage';
+import OrphanagesMap from './pages/OrphanagesMap';
+import ToggleOrphanage from './pages/ToggleOrphanage';
 
 function Routes() {
   return (
@@ -17,7 +17,8 @@ function Routes() {
         <Route path="/orphanages/create" component={CreateOrphanage} />
         <Route path="/orphanages/:orfanatoId" component={Orphanage} />
 
-        <Route path="/signin" component={SignIn} />
+        <Route path="/auth" component={Auth} />
+        <Route path="/toggle-orphanages" component={ToggleOrphanage} />
       </Switch>
     </BrowserRouter>
   );

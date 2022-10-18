@@ -34,7 +34,8 @@ public class OrfanatoService : IOrfanatoService
             Instructions = entity.Instructions,
             About = entity.About,
             Whatsapp = entity.Whatsapp,
-            OpeningHours = entity.HoraDeAbertura,
+            AbreAs = entity.AbreAs,
+            FechaAs = entity.FechaAs,
             OpenOnWeekends = entity.AbertoFimDeSemana,
             Images = imagensDto
         };
@@ -47,6 +48,12 @@ public class OrfanatoService : IOrfanatoService
         .OrderBy(x => x.Id)
         .Select(x => new OrfanatoMapDTO(x))
         .ToList();
+
+    public List<OrphanageCardsDTO> GetAllOrphanages() =>
+       OrfanatoRepository
+       .GetAll()
+       .Select(x => new OrphanageCardsDTO(x))
+       .ToList();
 
     public async Task<ValidationResponse<OrfanatoDTO>> InsertAsync(InsertOrfanatoRequest request)
     {
