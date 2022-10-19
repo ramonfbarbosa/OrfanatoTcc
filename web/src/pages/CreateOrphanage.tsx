@@ -58,9 +58,9 @@ export default function CreateOrphanage() {
     images.forEach(image => {
       data.append('images', image);
     });
-    
+
     await api.post('/insert', data)
-    .then(res => console.log)
+      .then(res => console.log)
     alert('Orfanato cadastrado com sucesso!');
     history.push('/app');
   }
@@ -78,7 +78,6 @@ export default function CreateOrphanage() {
     const selectedImagesPreview = selectedImages.map(image => {
       return { name: image.name, url: URL.createObjectURL(image) };
     });
-
     setPreviewImages(selectedImagesPreview);
   }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrfanatoAPI.DTOs;
 using OrfanatoAPI.Requests;
 using OrfanatoAPI.Services;
@@ -52,6 +53,7 @@ public class OrphanagesController : Controller
     }
 
     [HttpPost("toggle-orphanage")]
+    [Authorize]
     public async Task<IActionResult> ToggleOrphanage([FromBody] UpdateAtivoRequest request)
     {
         try
@@ -64,21 +66,6 @@ public class OrphanagesController : Controller
             return BadRequest(result);
         }
 
-        catch (Exception e)
-        {
-            string errorMessage = $"ActiveOrDesactiveMethod error - {e.Message}";
-            Logger.LogError(e, errorMessage);
-            return StatusCode(500, errorMessage);
-        }
-    }
-
-    [HttpPost("sign-in")]
-    public ActionResult SignIn([FromBody] SignInRequest request)
-    {
-        try
-        {
-            return Ok(request);
-        }
         catch (Exception e)
         {
             string errorMessage = $"ActiveOrDesactiveMethod error - {e.Message}";

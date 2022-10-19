@@ -10,6 +10,8 @@ import { FaWhatsapp } from 'react-icons/fa';
 import api from "../services/api";
 
 import '../styles/pages/orphanage.css';
+import { AxiosRequestConfig } from "axios";
+import { BASE_URL } from "../utils/requests";
 
 type OrphanageParams = {
   orfanatoId: string;
@@ -29,7 +31,7 @@ function clearAndUpper(text: string) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {
-    api.get(`/Orphanages/${orfanatoId}`)
+    api.get(`orphanages/orphanages/${orfanatoId}`)
     .then(res => {
       setOrphanage(res.data);
     });

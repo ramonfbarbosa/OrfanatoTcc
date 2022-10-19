@@ -1,57 +1,62 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Sidebar from "../components/SideBar";
-import api from "../services/api";
 import '../styles/pages/create-orphanage.css';
+import { useForm } from "react-hook-form";
+import Sidebar from "../components/SideBar";
+import { requestBackendLogin } from "../utils/requests";
 
-type SignInRequest = {
-    email: string;
-    password: string;
-} 
+const Auth = () => {
 
-const Auth = (signInRequest: SignInRequest) => {
-    const history = useHistory();
+    const { register, handleSubmit } = useForm<LoginData>();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const credentials = {
-        email: email,
-        password: password
+    type LoginData = {
+        email: string;
+        password: string;
     }
 
-    async function handleSubmit(event: FormEvent) {
-        event.preventDefault();
+    // async function handleSubmit(event: FormEvent) {
+    //     event.preventDefault();
 
-        console.log(credentials)
-        await api.post('/sign-in', credentials)
-            .then(res => {
-                // setSignIn(res.data)
-            });
-        alert('Logado com sucesso!');
-        history.push('auth/toggle-orphanages');
-    }
+    //     console.log(credentials)
+    //     await api.post('auth/sign-in', credentials)
+    //         .then(res => {
+    //             setEmail(res.data)
+    //         })
+    //     alert('Logado com sucesso!');
+    //     history.push('auth/toggle-orphanages');
+    // }
+
+    const onSubmit = (loginData: LoginData) => {
+        requestBackendLogin(loginData)
+        .then(res => {
+            console.log('SUCESSO', res)
+        })
+        .catch(erro => {
+            console.log('erro', erro)
+        });
+    };
 
     return (
         <div id="page-create-orphanage">
             <main>
                 <Sidebar />
-                <form onSubmit={handleSubmit} className="create-orphanage-form">
+                <form onSubmit={handleSubmit(onSubmit)} className="create-orphanage-form">
                     <fieldset>
                         <div className="input-block">
-                            <label htmlFor="name">Email</label>
+                            <label htmlFor="email">Email</label>
                             <input
+                                {...register("email")}
                                 id="email"
-                                value={email}
-                                onChange={event => setEmail(event.target.value)}
+                                name="email"
                             />
                         </div>
                         <div className="input-block">
                             <label htmlFor="password">Senha</label>
                             <input
+                                {...register("password")}
                                 id="password"
-                                value={password}
-                                onChange={event => setPassword(event.target.value)}
+                                type="password"
+                                name="password"
                             />
                         </div>
 

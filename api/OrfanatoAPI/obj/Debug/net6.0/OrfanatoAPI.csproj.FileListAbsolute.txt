@@ -72,6 +72,8 @@ C:\Users\ramon\projects\OrfanatoTcc\api\OrfanatoAPI\bin\Debug\net6.0\OrfanatoAPI
 C:\Users\ramon\projects\OrfanatoTcc\api\OrfanatoAPI\bin\Debug\net6.0\Castle.Core.dll
 C:\Users\ramon\projects\OrfanatoTcc\api\OrfanatoAPI\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\ramon\projects\OrfanatoTcc\api\OrfanatoAPI\bin\Debug\net6.0\Humanizer.dll
+C:\Users\ramon\projects\OrfanatoTcc\api\OrfanatoAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ramon\projects\OrfanatoTcc\api\OrfanatoAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 C:\Users\ramon\projects\OrfanatoTcc\api\OrfanatoAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Users\ramon\projects\OrfanatoTcc\api\OrfanatoAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\ramon\projects\OrfanatoTcc\api\OrfanatoAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll

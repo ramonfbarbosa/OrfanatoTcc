@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Auth from './pages/Auth';
 import CreateOrphanage from './pages/CreateOrphanage';
 import Landing from './pages/Landing';
@@ -17,7 +17,8 @@ function Routes() {
         <Route path="/orphanages/create" component={CreateOrphanage} />
         <Route path="/orphanages/:orfanatoId" component={Orphanage} />
 
-        <Route path="/auth" component={Auth} />
+        <Redirect from="/admin/toggle-orphanages" to="/admin/auth" exact/>
+        <Route from="/admin/auth" component={Auth} />
         <Route path="/toggle-orphanages" component={ToggleOrphanage} />
       </Switch>
     </BrowserRouter>

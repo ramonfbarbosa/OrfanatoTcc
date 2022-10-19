@@ -17,7 +17,7 @@ function OrphanagesMap() {
   const [orphanages, setOrphaanges] = useState<AllOrphanages[]>([]);
 
   useEffect(() => {
-    api.get("/orphanages-map").then(res => {
+    api.get("orphanages/orphanages-map").then(res => {
       setOrphaanges(res.data);
     });
   }, []);
@@ -37,7 +37,7 @@ function OrphanagesMap() {
           <span>Rio de Janeiro</span>
         </footer>
 
-        <Link to="/auth" style={{ textDecoration: 'none' , color: 'red'}}><strong>ADMINISTRADOR </strong>
+        <Link to="/admin/auth" style={{ textDecoration: 'none' , color: 'red'}}><strong>ADMINISTRADOR </strong>
             <FiAlertOctagon size={32} color="red" style={{marginBottom: '-9px'}}/>
         </Link>
       </aside>

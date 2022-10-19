@@ -3,15 +3,24 @@ import 'bootstrap/dist/css/bootstrap.css'
 import api from "../services/api";
 import { ToggleOrphanageRequest } from "../types/ToggleOrphanageRequest";
 import OrphanageCard from "../components/OrphanageCard";
+import { BASE_URL } from "../utils/requests";
+import { AxiosRequestConfig } from "axios";
+import axios from 'axios';
 
 const ToggleOrphanage = () => {
 
     const [orphanages, setOrphaanges] = useState<ToggleOrphanageRequest[]>([]);
 
     useEffect(() => {
-        api.get("/orphanages").then(res => {
-            setOrphaanges(res.data);
-        });
+        const params: AxiosRequestConfig = {
+            method: 'GET',
+            url: `/orphanages/orphanages`,
+            baseURL: BASE_URL
+        };
+        axios(params)
+            .then((response) => {
+                setOrphaanges(response.data);
+            })
     }, []);
 
     return (
