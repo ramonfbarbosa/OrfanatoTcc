@@ -7,10 +7,9 @@ import { useParams } from 'react-router-dom';
 import Sidebar from "../components/SideBar";
 import mapIcon from "../utils/mapIcon";
 import { FaWhatsapp } from 'react-icons/fa';
-import api from "../services/api";
 
 import '../styles/pages/orphanage.css';
-import { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { BASE_URL } from "../utils/requests";
 
 type OrphanageParams = {
@@ -25,17 +24,23 @@ function clearAndUpper(text: string) {
   return text.replace(/-/, "").toUpperCase();
 }
 
- const Orphanage = () => {
+const Orphanage = () => {
+
   const { orfanatoId } = useParams<OrphanageParams>();
   const [orphanage, setOrphanage] = useState<OrphanageRequest>();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {
-    api.get(`orphanages/orphanages/${orfanatoId}`)
-    .then(res => {
-      setOrphanage(res.data);
-    });
-  }, [orfanatoId]);
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: `/orphanages/orphanages/${orfanatoId}`,
+      baseURL: BASE_URL
+    };
+    axios(params)
+      .then((response) => {
+        setOrphanage(response.data);
+      })
+  }, []);
 
   if (!orphanage) {
     return <p>Carregando...</p>
@@ -108,24 +113,24 @@ function clearAndUpper(text: string) {
               {orphanage.openOnWeekends ? (
                 <div className="open-on-weekends">
                   <FiInfo size={32} color="#39CC83" />
-                Atendemos <br />
-                fim de semana
+                  Atendemos <br />
+                  fim de semana
                 </div>
               ) : (
-                  <div className="open-on-weekends dont-open">
-                    <FiInfo size={32} color="#FF6690" />
-                Não Atendemos <br />
-                fim de semana
-                  </div>
-                )}
+                <div className="open-on-weekends dont-open">
+                  <FiInfo size={32} color="#FF6690" />
+                  Não Atendemos <br />
+                  fim de semana
+                </div>
+              )}
 
             </div>
             <hr />
-            <a 
+            <a
               type="button"
               className="contact-button"
-              href={`https://api.whatsapp.com/send?l=pt_BR&phone=${orphanage.whatsapp}&text=Oi, quero conversar sobre visitas no ${orphanage.name} `}> 
-              <FaWhatsapp size={50} color="green" style={{marginBottom: '-9px'}}/>
+              href={`https://api.whatsapp.com/send?l=pt_BR&phone=${orphanage.whatsapp}&text=Oi, quero conversar sobre visitas no ${orphanage.name} `}>
+              <FaWhatsapp size={50} color="green" style={{ marginBottom: '-9px' }} />
               <a className="btn btn-secondary">Chamar no whatsapp</a> <br />
             </a>
           </div>

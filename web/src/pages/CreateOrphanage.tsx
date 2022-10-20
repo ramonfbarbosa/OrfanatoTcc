@@ -16,7 +16,7 @@ interface PreviewImage {
   url: string;
 }
 
-export default function CreateOrphanage() {
+const CreateOrphanage = () => {
   const history = useHistory();
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
@@ -234,3 +234,5 @@ export default function CreateOrphanage() {
     </div>
   );
 }
+
+export default CreateOrphanage;

@@ -8,8 +8,9 @@ import '../styles/pages/landing.css';
 import logoImg from '../images/logo.svg';
 import markerImg from '../images/map-marker.svg';
 
-function Landing() {
+const Landing = () =>  {
   return (
+    
     <div id="page-landing">
 
       <motion.div

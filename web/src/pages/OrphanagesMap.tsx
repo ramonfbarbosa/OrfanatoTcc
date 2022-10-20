@@ -3,23 +3,29 @@ import { Link } from 'react-router-dom';
 import { FiPlus, FiArrowRight, FiAlertOctagon } from 'react-icons/fi';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
-import api from '../services/api';
-
 import mapIcon from '../utils/mapIcon';
 
 import mapMakerImg from '../images/map-marker.svg'
 
 import '../styles/pages/orphanages-map.css';
 import { AllOrphanages } from '../types/AllOrphanages';
+import axios, { AxiosRequestConfig } from 'axios';
+import { BASE_URL } from '../utils/requests';
 
-function OrphanagesMap() {
+const OrphanagesMap = () => {
 
   const [orphanages, setOrphaanges] = useState<AllOrphanages[]>([]);
 
   useEffect(() => {
-    api.get("orphanages/orphanages-map").then(res => {
-      setOrphaanges(res.data);
-    });
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: `/orphanages/orphanages-map`,
+      baseURL: BASE_URL
+    };
+    axios(params)
+      .then((response) => {
+        setOrphaanges(response.data);
+      })
   }, []);
 
   return (
@@ -37,8 +43,8 @@ function OrphanagesMap() {
           <span>Rio de Janeiro</span>
         </footer>
 
-        <Link to="/admin/auth" style={{ textDecoration: 'none' , color: 'red'}}><strong>ADMINISTRADOR </strong>
-            <FiAlertOctagon size={32} color="red" style={{marginBottom: '-9px'}}/>
+        <Link to="/admin/auth" style={{ textDecoration: 'none', color: 'red' }}><strong>ADMINISTRADOR </strong>
+          <FiAlertOctagon size={32} color="red" style={{ marginBottom: '-9px' }} />
         </Link>
       </aside>
 
