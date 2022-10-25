@@ -78,7 +78,7 @@ const CreateOrphanage = () => {
     });
 
     await api.post('/insert', data)
-      .then(res => console.log)
+      .then(res => console.log(res))
     alert('Orfanato cadastrado com sucesso!');
     history.push('/app');
   }
