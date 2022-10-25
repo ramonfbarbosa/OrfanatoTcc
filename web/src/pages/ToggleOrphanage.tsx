@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.css'
-import api from "../services/api";
 import { ToggleOrphanageRequest } from "../types/ToggleOrphanageRequest";
 import OrphanageCard from "../components/OrphanageCard";
 import { BASE_URL } from "../utils/requests";
@@ -13,8 +12,8 @@ const ToggleOrphanage = () => {
 
     useEffect(() => {
         const params: AxiosRequestConfig = {
-            method: 'GET',
-            url: `/orphanages/orphanages`,
+            method: 'POST',
+            url: `/orphanages/toggle-orphanage`,
             baseURL: BASE_URL
         };
         axios(params)

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { FiPlus, FiX } from "react-icons/fi";
@@ -10,6 +10,9 @@ import Sidebar from "../components/SideBar";
 import mapIcon from "../utils/mapIcon";
 
 import '../styles/pages/create-orphanage.css';
+import { OrphanageRequest } from "../types/OrphanageRequest";
+import axios, { AxiosRequestConfig } from "axios";
+import { BASE_URL } from "../utils/requests";
 
 interface PreviewImage {
   name: string;
@@ -18,6 +21,21 @@ interface PreviewImage {
 
 const CreateOrphanage = () => {
   const history = useHistory();
+
+  const [orphanages, setOrphaanges] = useState<OrphanageRequest[]>([]);
+
+  useEffect(() => {
+    const params: AxiosRequestConfig = {
+      method: 'POST',
+      url: `/orphanages/insert`,
+      baseURL: BASE_URL
+    };
+    axios(params)
+      .then((response) => {
+        setOrphaanges(response.data);
+      })
+  }, []);
+
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
 

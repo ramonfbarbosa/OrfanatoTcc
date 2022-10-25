@@ -17,14 +17,15 @@ const OrphanageCard = (orphanage: ToggleOrphanageRequest) => {
     const isActive = orphanage.status != true
     let status;
     let ativar;
-    if (isActive){
+    if (!isActive){
         status = <h5 className='card-text mb-2 text-muted'>STATUS: DESATIVADO</h5>;
         ativar = <a href="#" className="btn btn-success" >ATIVAR</a>
     }
-    if (!isActive){
+    if (isActive){
         status = <h5 className='card-text mb-2 text-muted'>STATUS: ATIVADO</h5>;
         ativar = <a href="#" className="btn btn-danger" >DESATIVAR</a>
     }
+    
     return (
         <div className="card bg-light mx-2 my-2" style={{ width: '17rem'  }}>
             <div className="card-header" >

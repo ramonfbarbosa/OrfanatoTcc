@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useHistory } from "react-router-dom";
 import '../styles/pages/create-orphanage.css';
 import { useForm } from "react-hook-form";
 import Sidebar from "../components/SideBar";
@@ -32,7 +31,7 @@ const Auth = () => {
             console.log('SUCESSO', res)
         })
         .catch(erro => {
-            console.log('erro', erro)
+            console.log('ERRO', erro)
         });
     };
 

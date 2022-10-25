@@ -13,6 +13,10 @@
     z-index: 10;
 }
 
+h1, p, strong, span, h1 {
+    color: #FFF;
+}
+
 #page-landing .content-wrapper {
     position: relative;
 
