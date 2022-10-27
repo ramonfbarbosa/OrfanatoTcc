@@ -10,9 +10,9 @@ import Sidebar from "../components/SideBar";
 import mapIcon from "../utils/mapIcon";
 
 import '../styles/pages/create-orphanage.css';
-import { OrphanageRequest } from "../types/OrphanageRequest";
 import axios, { AxiosRequestConfig } from "axios";
 import { BASE_URL } from "../utils/requests";
+import { OrphanageRequest } from "../types/OrphanageRequest";
 
 interface PreviewImage {
   name: string;
@@ -77,7 +77,7 @@ const CreateOrphanage = () => {
       data.append('images', image);
     });
 
-    await api.post('/insert', data)
+    await api.post('orphanages/insert', data)
       .then(res => console.log(res))
     alert('Orfanato cadastrado com sucesso!');
     history.push('/app');
@@ -91,17 +91,18 @@ const CreateOrphanage = () => {
 
     event.target.value = "";
 
-    setImages(selectedImages);
+    setImages([...images, ...selectedImages]);
 
     const selectedImagesPreview = selectedImages.map(image => {
       return { name: image.name, url: URL.createObjectURL(image) };
     });
-    setPreviewImages(selectedImagesPreview);
+
+    //quando state é um array, usar a notação de spread, criando um novo array com todos os elementos
+    setPreviewImages([...previewImages, ...selectedImagesPreview]);
   }
 
   function handleRemoveImage(image: PreviewImage) {
-    setPreviewImages(
-      previewImages.map((image) => image).filter((img) => img.url !== image.url)
+    setPreviewImages([...previewImages, ...previewImages.map((image) => image).filter((img) => img.url !== image.url)]
     );
     setImages(
       images.map((image) => image).filter((img) => img.name !== image.name)
