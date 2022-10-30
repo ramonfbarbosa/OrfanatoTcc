@@ -1,31 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FiPlus, FiArrowRight, FiAlertOctagon } from 'react-icons/fi';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FiPlus, FiArrowRight, FiAlertOctagon } from "react-icons/fi";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
-import mapIcon from '../utils/mapIcon';
+import mapIcon from "../utils/mapIcon";
 
-import mapMakerImg from '../images/map-marker.svg'
+import mapMakerImg from "../images/map-marker.svg";
 
-import '../styles/pages/orphanages-map.css';
-import { AllOrphanages } from '../types/AllOrphanages';
-import axios, { AxiosRequestConfig } from 'axios';
-import { BASE_URL } from '../utils/requests';
+import "../styles/pages/orphanages-map.css";
+import { AllOrphanages } from "../types/AllOrphanages";
+import axios, { AxiosRequestConfig } from "axios";
+import { BASE_URL } from "../utils/requests";
 
 const OrphanagesMap = () => {
-
-  const [orphanages, setOrphaanges] = useState<AllOrphanages[]>([]);
+  const [orphanages, setOrphanages] = useState<AllOrphanages[]>([]);
 
   useEffect(() => {
     const params: AxiosRequestConfig = {
-      method: 'GET',
+      method: "GET",
       url: `/orphanages/orphanages-map`,
-      baseURL: BASE_URL
+      baseURL: BASE_URL,
     };
     axios(params)
       .then((response) => {
-        setOrphaanges(response.data);
+        setOrphanages(response.data);
       })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -43,8 +45,13 @@ const OrphanagesMap = () => {
           <span>Rio de Janeiro</span>
         </footer>
 
-        <Link to="/admin/auth" style={{ textDecoration: 'none', color: 'red' }}><strong>ADMINISTRADOR </strong>
-          <FiAlertOctagon size={32} color="red" style={{ marginBottom: '-9px' }} />
+        <Link to="/admin/auth" style={{ textDecoration: "none", color: "red" }}>
+          <strong>ADMINISTRADOR </strong>
+          <FiAlertOctagon
+            size={32}
+            color="red"
+            style={{ marginBottom: "-9px" }}
+          />
         </Link>
       </aside>
 
@@ -53,15 +60,10 @@ const OrphanagesMap = () => {
         zoom={10}
         style={{ width: "100%", height: "100%" }}
       >
-
         {/* Mapa alternativo: "https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}" */}
-        <TileLayer
-          url={
-            `https://a.tile.openstreetmap.org/{z}/{x}/{y}.png`
-          }
-        />
+        <TileLayer url={`https://a.tile.openstreetmap.org/{z}/{x}/{y}.png`} />
 
-        {orphanages.map(orphanage => {
+        {orphanages.map((orphanage) => {
           return (
             <Marker
               key={orphanage.id}
@@ -80,17 +82,15 @@ const OrphanagesMap = () => {
                 </Link>
               </Popup>
             </Marker>
-          )
+          );
         })}
-
       </Map>
 
       <Link to="/orphanages/create" className="create-orphanage">
         <FiPlus size={32} color="#FFF" />
       </Link>
-
     </div>
   );
-}
+};
 
 export default OrphanagesMap;

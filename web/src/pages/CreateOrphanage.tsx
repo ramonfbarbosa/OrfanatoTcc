@@ -1,15 +1,15 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import { Map, Marker, TileLayer } from "react-leaflet";
 import { FiPlus, FiX } from "react-icons/fi";
-import { LeafletMouseEvent } from 'leaflet';
+import { LeafletMouseEvent } from "leaflet";
 
 import api from "../services/api";
 
 import Sidebar from "../components/SideBar";
 import mapIcon from "../utils/mapIcon";
 
-import '../styles/pages/create-orphanage.css';
+import "../styles/pages/create-orphanage.css";
 import axios, { AxiosRequestConfig } from "axios";
 import { BASE_URL } from "../utils/requests";
 import { OrphanageRequest } from "../types/OrphanageRequest";
@@ -22,28 +22,27 @@ interface PreviewImage {
 const CreateOrphanage = () => {
   const history = useHistory();
 
-  const [orphanages, setOrphaanges] = useState<OrphanageRequest[]>([]);
+  const [orphanages, setOrphanages] = useState<OrphanageRequest[]>([]);
 
-  useEffect(() => {
-    const params: AxiosRequestConfig = {
-      method: 'POST',
-      url: `/orphanages/insert`,
-      baseURL: BASE_URL
-    };
-    axios(params)
-      .then((response) => {
-        setOrphaanges(response.data);
-      })
-  }, []);
-
+  // useEffect(() => {
+  //   const params: AxiosRequestConfig = {
+  //     method: 'POST',
+  //     url: `/orphanages/insert`,
+  //     baseURL: BASE_URL
+  //   };
+  //   axios(params)
+  //     .then((response) => {
+  //       setOrphanages(response.data);
+  //     })
+  // }, []);
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
 
-  const [name, setName] = useState('');
-  const [about, setAbout] = useState('');
-  const [instructions, setInstructions] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
-  const [opening_hours, setOpeningHours] = useState('');
+  const [name, setName] = useState("");
+  const [about, setAbout] = useState("");
+  const [instructions, setInstructions] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [opening_hours, setOpeningHours] = useState("");
   const [open_on_weekends, setOpenOnWeekends] = useState(true);
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<PreviewImage[]>([]);
@@ -53,7 +52,7 @@ const CreateOrphanage = () => {
 
     setPosition({
       latitude: lat,
-      longitude: lng
+      longitude: lng,
     });
   }
 
@@ -64,23 +63,30 @@ const CreateOrphanage = () => {
 
     const data = new FormData();
 
-    data.append('name', name);
-    data.append('about', about);
-    data.append('whatsapp', whatsapp);
-    data.append('latitude', String(latitude));
-    data.append('longitude', String(longitude));
-    data.append('instructions', instructions);
-    data.append('opening_hours', opening_hours);
-    data.append('open_on_weekends', String(open_on_weekends));
+    data.append("name", name);
+    data.append("about", about);
+    data.append("whatsapp", whatsapp);
+    data.append("latitude", String(latitude));
+    data.append("longitude", String(longitude));
+    data.append("instructions", instructions);
+    data.append("opening_hours", opening_hours);
+    data.append("open_on_weekends", String(open_on_weekends));
 
-    images.forEach(image => {
-      data.append('images', image);
+    images.forEach((image) => {
+      data.append("images", image);
     });
 
-    await api.post('orphanages/insert', data)
-      .then(res => console.log(res))
-    alert('Orfanato cadastrado com sucesso!');
-    history.push('/app');
+    await api
+      .post("orphanages/insert", JSON.stringify(Object.fromEntries(data)))
+      .then((res) => {
+        console.log(res);
+        alert("Orfanato cadastrado com sucesso!");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    history.push("/app");
   }
 
   function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
@@ -93,7 +99,7 @@ const CreateOrphanage = () => {
 
     setImages([...images, ...selectedImages]);
 
-    const selectedImagesPreview = selectedImages.map(image => {
+    const selectedImagesPreview = selectedImages.map((image) => {
       return { name: image.name, url: URL.createObjectURL(image) };
     });
 
@@ -102,8 +108,12 @@ const CreateOrphanage = () => {
   }
 
   function handleRemoveImage(image: PreviewImage) {
-    setPreviewImages([...previewImages, ...previewImages.map((image) => image).filter((img) => img.url !== image.url)]
-    );
+    setPreviewImages([
+      ...previewImages,
+      ...previewImages
+        .map((image) => image)
+        .filter((img) => img.url !== image.url),
+    ]);
     setImages(
       images.map((image) => image).filter((img) => img.name !== image.name)
     );
@@ -120,7 +130,7 @@ const CreateOrphanage = () => {
 
             <Map
               center={[-22.9035, -43.2096]}
-              style={{ width: '100%', height: 280 }}
+              style={{ width: "100%", height: 280 }}
               zoom={15}
               onclick={handleMapClick}
             >
@@ -132,13 +142,9 @@ const CreateOrphanage = () => {
                 <Marker
                   interactive={false}
                   icon={mapIcon}
-                  position={[
-                    position.latitude,
-                    position.longitude
-                  ]}
+                  position={[position.latitude, position.longitude]}
                 />
               )}
-
             </Map>
 
             <div className="input-block">
@@ -146,7 +152,7 @@ const CreateOrphanage = () => {
               <input
                 id="name"
                 value={name}
-                onChange={event => setName(event.target.value)}
+                onChange={(event) => setName(event.target.value)}
               />
             </div>
 
@@ -155,17 +161,19 @@ const CreateOrphanage = () => {
               <input
                 id="whatsapp"
                 value={whatsapp}
-                onChange={event => setWhatsapp(event.target.value)}
+                onChange={(event) => setWhatsapp(event.target.value)}
               />
             </div>
 
             <div className="input-block">
-              <label htmlFor="about">Sobre <span>Máximo de 300 caracteres</span></label>
+              <label htmlFor="about">
+                Sobre <span>Máximo de 300 caracteres</span>
+              </label>
               <textarea
                 id="name"
                 maxLength={300}
                 value={about}
-                onChange={event => setAbout(event.target.value)}
+                onChange={(event) => setAbout(event.target.value)}
               />
             </div>
 
@@ -210,7 +218,7 @@ const CreateOrphanage = () => {
               <textarea
                 id="instructions"
                 value={instructions}
-                onChange={event => setInstructions(event.target.value)}
+                onChange={(event) => setInstructions(event.target.value)}
               />
             </div>
 
@@ -219,7 +227,7 @@ const CreateOrphanage = () => {
               <input
                 id="opening_hours"
                 value={opening_hours}
-                onChange={event => setOpeningHours(event.target.value)}
+                onChange={(event) => setOpeningHours(event.target.value)}
               />
             </div>
 
@@ -229,14 +237,14 @@ const CreateOrphanage = () => {
               <div className="button-select">
                 <button
                   type="button"
-                  className={open_on_weekends ? 'active' : ''}
+                  className={open_on_weekends ? "active" : ""}
                   onClick={() => setOpenOnWeekends(true)}
                 >
                   Sim
                 </button>
                 <button
                   type="button"
-                  className={!open_on_weekends ? 'active' : ''}
+                  className={!open_on_weekends ? "active" : ""}
                   onClick={() => setOpenOnWeekends(false)}
                 >
                   Não
@@ -252,6 +260,6 @@ const CreateOrphanage = () => {
       </main>
     </div>
   );
-}
+};
 
 export default CreateOrphanage;
