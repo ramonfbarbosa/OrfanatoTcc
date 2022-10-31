@@ -13,7 +13,7 @@ const ToggleOrphanage = () => {
     useEffect(() => {
         const params: AxiosRequestConfig = {
             method: 'POST',
-            url: `/orphanages/toggle-orphanage`,
+            url: `/orphanage/toggle-orphanage`,
             baseURL: BASE_URL
         };
         axios(params)

@@ -7635,19 +7635,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gabri\\.nuget\\packages\\": {}
+    "C:\\Users\\ramon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\dev\\OrfanatoTcc\\api\\OrfanatoAPI\\OrfanatoAPI.csproj",
+      "projectUniqueName": "C:\\Users\\ramon\\Desktop\\OrfanatoTcc\\api\\OrfanatoAPI\\OrfanatoAPI.csproj",
       "projectName": "OrfanatoAPI",
-      "projectPath": "C:\\dev\\OrfanatoTcc\\api\\OrfanatoAPI\\OrfanatoAPI.csproj",
-      "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-      "outputPath": "C:\\dev\\OrfanatoTcc\\api\\OrfanatoAPI\\obj\\",
+      "projectPath": "C:\\Users\\ramon\\Desktop\\OrfanatoTcc\\api\\OrfanatoAPI\\OrfanatoAPI.csproj",
+      "packagesPath": "C:\\Users\\ramon\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ramon\\Desktop\\OrfanatoTcc\\api\\OrfanatoAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ramon\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

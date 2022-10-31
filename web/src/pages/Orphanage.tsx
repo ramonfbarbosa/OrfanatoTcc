@@ -33,7 +33,7 @@ const Orphanage = () => {
   useEffect(() => {
     const params: AxiosRequestConfig = {
       method: 'GET',
-      url: `/orphanages/orphanages/${orfanatoId}`,
+      url: `/orphanage/orphanages/${orfanatoId}`,
       baseURL: BASE_URL
     };
     axios(params)

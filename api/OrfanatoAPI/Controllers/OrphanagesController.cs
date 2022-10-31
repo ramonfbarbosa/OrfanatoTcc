@@ -8,12 +8,12 @@ namespace OrfanatoAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class OrphanagesController : Controller
+public class OrphanageController : Controller
 {
-    private ILogger<OrphanagesController> Logger { get; }
+    private ILogger<OrphanageController> Logger { get; }
     public IOrfanatoService OrfanatoService { get; }
 
-    public OrphanagesController(IOrfanatoService orfanatoService, ILogger<OrphanagesController> logger)
+    public OrphanageController(IOrfanatoService orfanatoService, ILogger<OrphanageController> logger)
     {
         OrfanatoService = orfanatoService;
         Logger = logger;

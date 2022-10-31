@@ -8,11 +8,12 @@ public class InsertOrfanatoRequest
     public string Name { get; set; }
     public string About { get; set; }
     public string Whatsapp { get; set; }
-    public decimal Latitude { get; set; }
-    public decimal Longitude { get; set; }
+    public string Latitude { get; set; }
+    public string Longitude { get; set; }
     public string Instructions { get; set; }
-    public string OpeningHours { get; set; }
-    public bool OpenOnWeekends { get; set; }
+    public string AbreAs { get; set; }
+    public string FechaAs { get; set; }
+    public string OpenOnWeekends { get; set; }
     public List<BlobImagesDTO> Images { get; set; }
 
     public InsertOrfanatoRequest() { }
@@ -22,11 +23,12 @@ public class InsertOrfanatoRequest
         {
             Name = Name,
             Whatsapp = Whatsapp,
-            Latitude = Latitude,
-            Longitude = Longitude,
+            Latitude = decimal.Parse(Latitude),
+            Longitude = decimal.Parse(Longitude),
             About = About,
             Instructions = Instructions,
-            AbreAs = OpeningHours,
-            AbertoFimDeSemana = OpenOnWeekends
+            AbreAs = AbreAs,
+            FechaAs = FechaAs,
+            AbertoFimDeSemana = bool.Parse(OpenOnWeekends)
         };
 }

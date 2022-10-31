@@ -38,8 +38,10 @@ public class OrfanatoValidator : AbstractValidator<Orphanage>
             .WithMessage("O campo hora de abertura não pode ficar vazio!")
             .NotNull()
             .WithMessage("O campo hora de abertura não pode ser nulo!");
-        RuleFor(x => x.Imagens)
+        RuleFor(x => x.FechaAs)
             .NotEmpty()
-            .WithMessage("O orfanato deveria conter fotos"); //rever
+            .WithMessage("O campo hora de abertura não pode ficar vazio!")
+            .NotNull()
+            .WithMessage("O campo hora de abertura não pode ser nulo!");
     }
 }
