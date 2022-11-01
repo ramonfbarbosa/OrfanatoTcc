@@ -1,4 +1,5 @@
-import Axios from "axios";
+import axios from "axios";
+import Axios, { AxiosRequestConfig } from "axios";
 import qs from "qs";
 
 export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'https://localhost:7123/api';
@@ -35,6 +36,14 @@ export const requestBackendLogin = (loginData: FormLoginData) => {
         Authorization: `Bearer ${getAuthData}`
     }
     return Axios({ method: 'POST', baseURL: BASE_URL, url: '/orphanage/toggle-orphanage', headers })
+}
+
+export const requestBackend = (config: AxiosRequestConfig) => {
+    const headers = config.withCredentials ? {
+        ...config.headers,
+        Authorization: `Bearer ` + getAuthData().token
+    } : config.headers
+    return axios({ ...config, baseURL: BASE_URL, headers });
 }
 
 export const requestBackendCreateOrphanage = (createData: CreateData) => {

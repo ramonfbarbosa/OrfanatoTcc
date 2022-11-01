@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/components/OrphanageCard.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ToggleOrphanageRequest } from '../types/ToggleOrphanageRequest';
 import api from '../services/api';
-import { getAuthData } from '../utils/requests';
+import { getAuthData, requestBackend } from '../utils/requests';
 
 function formatPhoneNumber(phoneNumberString: string) {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
@@ -15,16 +15,14 @@ function formatPhoneNumber(phoneNumberString: string) {
     return null;
 }
 
-const OrphanageCard = (orphanage: ToggleOrphanageRequest) => {
-
-    const handleClick = () => {
-        // let config = {
-        //     headers: {
-        //         Authorization: `Bearer ${}`
-        //     }
-        // }
+const HandleClick = (orphanage: ToggleOrphanageRequest) => {
+    const config = {
+        headers: {
+          Authorization: `Bearer ` + getAuthData().token
+        }
+      };
         api
-            .post("orphanage/toggle-orphanage", JSON.stringify({ "id": orphanage.id }))
+            .post("orphanage/toggle-orphanage", JSON.stringify({ "id": orphanage.id }), config)
             .then((res) => {
                 console.log(res)
                 alert("status do orfanato atualizado com sucesso!");
@@ -33,7 +31,10 @@ const OrphanageCard = (orphanage: ToggleOrphanageRequest) => {
             .catch((error) => {
                 console.log(error);
             });
-    };
+}
+
+const OrphanageCard = (orphanage: ToggleOrphanageRequest) => {
+    
 
     const isActive = orphanage.status != true
     let status;
@@ -41,11 +42,11 @@ const OrphanageCard = (orphanage: ToggleOrphanageRequest) => {
 
     if (isActive) {
         status = <h5 className='card-text mb-2 text-muted'>STATUS: DESATIVADO</h5>;
-        ativar = <a href="#" className="btn btn-success" onClick={handleClick}>ATIVAR</a>
+        ativar = <a href="#" className="btn btn-success" onClick={() => HandleClick(orphanage)}>ATIVAR</a>
     }
     if (!isActive) {
         status = <h5 className='card-text mb-2 text-muted'>STATUS: ATIVADO</h5>;
-        ativar = <a href="#" className="btn btn-danger" onClick={handleClick}>DESATIVAR</a>
+        ativar = <a href="#" className="btn btn-danger" onClick={() => HandleClick(orphanage)}>DESATIVAR</a>
     }
 
     return (

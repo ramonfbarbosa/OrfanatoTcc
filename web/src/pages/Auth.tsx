@@ -15,18 +15,6 @@ const Auth = () => {
         password: string;
     }
 
-    // async function handleSubmit(event: FormEvent) {
-    //     event.preventDefault();
-
-    //     console.log(credentials)
-    //     await api.post('auth/sign-in', credentials)
-    //         .then(res => {
-    //             setEmail(res.data)
-    //         })
-    //     alert('Logado com sucesso!');
-    //     history.push('auth/toggle-orphanages');
-    // }
-
     const onSubmit = (loginData: LoginData) => {
         api
             .post("auth/sign-in", JSON.stringify(loginData))

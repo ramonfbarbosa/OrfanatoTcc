@@ -53,7 +53,7 @@ public class OrphanageController : Controller
     }
 
     [HttpPost("toggle-orphanage")]
-    //[Authorize]
+    [Authorize]
     public async Task<IActionResult> ToggleOrphanage([FromBody] UpdateAtivoRequest request)
     {
         try
