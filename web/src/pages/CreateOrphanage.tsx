@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import { FiPlus, FiX } from "react-icons/fi";
 import { LeafletMouseEvent } from "leaflet";
+import swal from 'sweetalert';
 
 import api from "../services/api";
 
@@ -65,7 +66,7 @@ const CreateOrphanage = () => {
       .post("orphanage/insert", JSON.stringify(Object.fromEntries(data)))
       .then((res) => {
         console.log(res);
-        alert("Orfanato cadastrado com sucesso!");
+        swal("Orfanato cadastrado com sucesso!", "", "success");
         history.push('/app');
       })
       .catch((error) => {
@@ -207,22 +208,22 @@ const CreateOrphanage = () => {
                 />
               </div>
 
-                <div className="input-block col-12">
-                  <label htmlFor="abreAs">Abre as:</label>
-                  <input
-                    id="abreAs"
-                    value={abreAs}
-                    onChange={(event) => setAbreAs(event.target.value)}
-                  />
-                </div>
+              <div className="input-block col-12">
+                <label htmlFor="abreAs">Abre as:</label>
+                <input
+                  id="abreAs"
+                  value={abreAs}
+                  onChange={(event) => setAbreAs(event.target.value)}
+                />
+              </div>
 
-                <div className="input-block col-12">
-                  <label htmlFor="fechaAs">Fecha as:</label>
-                  <input
-                    id="fechaAs"
-                    value={fechaAs}
-                    onChange={(event) => setFechaAs(event.target.value)}
-                  />
+              <div className="input-block col-12">
+                <label htmlFor="fechaAs">Fecha as:</label>
+                <input
+                  id="fechaAs"
+                  value={fechaAs}
+                  onChange={(event) => setFechaAs(event.target.value)}
+                />
               </div>
 
 

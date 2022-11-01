@@ -5,10 +5,11 @@ import Sidebar from "../components/SideBar";
 import { requestBackendLogin, saveAuthData } from "../utils/requests";
 import api from "../services/api";
 import { useHistory } from "react-router-dom";
+import swal from 'sweetalert';
 
 const Auth = () => {
     const history = useHistory();
-    const { register, handleSubmit } = useForm<LoginData>();
+    const { register, handleSubmit, formState: {errors} } = useForm<LoginData>();
 
     type LoginData = {
         email: string;
@@ -20,8 +21,7 @@ const Auth = () => {
             .post("auth/sign-in", JSON.stringify(loginData))
             .then((res) => {
                 saveAuthData(res.data);
-                console.log(res);
-                alert("Logado com sucesso!");
+                swal("Logado com sucesso!", "","success");
                 history.push("/admin/toggle-orphanages")
             })
             .catch((error) => {
@@ -38,19 +38,29 @@ const Auth = () => {
                         <div className="input-block">
                             <label htmlFor="email">Email</label>
                             <input
-                                {...register("email")}
+                                {...register("email", {
+                                    required: 'Campo obrigatório',
+                                    pattern: {
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: 'Email inválido'
+                                    }
+                                })}
                                 id="email"
                                 name="email"
                             />
+                            <div className="invalid-feedback d-block">{errors.email?.message}</div>
                         </div>
                         <div className="input-block">
                             <label htmlFor="password">Senha</label>
                             <input
-                                {...register("password")}
+                                {...register("password", {
+                                    required: 'Campo obrigatório'
+                                })}
                                 id="password"
                                 type="password"
                                 name="password"
                             />
+                            <div className="invalid-feedback d-block">{errors.password?.message}</div>
                         </div>
 
                         <button className="confirm-button" type="submit">
