@@ -12,8 +12,8 @@ const ToggleOrphanage = () => {
 
     useEffect(() => {
         const params: AxiosRequestConfig = {
-            method: 'POST',
-            url: `/orphanage/toggle-orphanage`,
+            method: 'GET',
+            url: `/orphanage/orphanages`,
             baseURL: BASE_URL
         };
         axios(params)
@@ -26,7 +26,7 @@ const ToggleOrphanage = () => {
         <main>
             <div className="container my-4">
                 <div>
-                    <h1>Ative ou desative orfanatos</h1>
+                    <h1 style={{color: "#212529"}}>Ative ou desative orfanatos</h1>
                 </div>
                 <div className="card text-center">
                     <div className="card-header">

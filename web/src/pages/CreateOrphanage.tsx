@@ -66,6 +66,7 @@ const CreateOrphanage = () => {
       .then((res) => {
         console.log(res);
         alert("Orfanato cadastrado com sucesso!");
+        history.push('/app');
       })
       .catch((error) => {
         console.log(error);

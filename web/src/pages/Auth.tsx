@@ -2,10 +2,12 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import '../styles/pages/create-orphanage.css';
 import { useForm } from "react-hook-form";
 import Sidebar from "../components/SideBar";
-import { requestBackendLogin } from "../utils/requests";
+import { getAuthData, requestBackendLogin, saveAuthData } from "../utils/requests";
+import api from "../services/api";
+import { useHistory } from "react-router-dom";
 
 const Auth = () => {
-
+    const history = useHistory();
     const { register, handleSubmit } = useForm<LoginData>();
 
     type LoginData = {
@@ -26,13 +28,18 @@ const Auth = () => {
     // }
 
     const onSubmit = (loginData: LoginData) => {
-        requestBackendLogin(loginData)
-        .then(res => {
-            console.log('SUCESSO', res)
-        })
-        .catch(erro => {
-            console.log('ERRO', erro)
-        });
+        api
+            .post("auth/sign-in", JSON.stringify(loginData))
+            .then((res) => {
+                saveAuthData(res.data);
+                const token = getAuthData().token;
+                console.log(res);
+                alert("Logado com sucesso!");
+                history.push("/admin/toggle-orphanages")
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (
@@ -67,7 +74,7 @@ const Auth = () => {
             </main >
         </div >
 
-        
+
     );
 }
 

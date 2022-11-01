@@ -33,11 +33,8 @@ public class AuthController : Controller
                 {
                     Message = "Usuário autenticado com sucesso!",
                     Success = true,
-                    Data = new
-                    {
-                        Token = token,
-                        TokenExpires = DateTime.Now.AddHours(int.Parse(Configuration["Jwt:HoursToExpire"]))
-                    }
+                    Token = token,
+                    TokenExpires = DateTime.Now.AddHours(int.Parse(Configuration["Jwt:HoursToExpire"]))
                 });
             }
             else

@@ -4,6 +4,13 @@ import qs from "qs";
 export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'https://localhost:7123/api';
 export const TOKEN = process.env.REACT_APP_CLIENTE_ID ?? 'YXNkYXNmcWVncTN5MmUyN3kyNmV3eXdleXczdWk0cmV1aXJv';
 
+type AuthData = {
+    message: string,
+    success: boolean,
+    token: string,
+    tokenExpires: string
+}
+
 type FormLoginData = {
     email: string;
     password: string;
@@ -14,17 +21,20 @@ type CreateData = {
     password: string;
 }
 
+export const saveAuthData = (obj: AuthData) => {
+    localStorage.setItem('authData', JSON.stringify(obj))
+}
+
+export const getAuthData = () => {
+    const str = localStorage.getItem("authData") ?? "{}";
+    return JSON.parse(str) as AuthData;
+}
+
 export const requestBackendLogin = (loginData: FormLoginData) => {
     const headers = {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        Authorization: `Bearer ${TOKEN}`
+        Authorization: `Bearer ${getAuthData}`
     }
-
-    const data = qs.stringify({
-        ...loginData,
-        grant_type: 'password'
-    })
-    return Axios({method: 'POST', baseURL: BASE_URL, url: '/auth/sign-in', data, headers})
+    return Axios({ method: 'POST', baseURL: BASE_URL, url: '/orphanage/toggle-orphanage', headers })
 }
 
 export const requestBackendCreateOrphanage = (createData: CreateData) => {
@@ -32,5 +42,5 @@ export const requestBackendCreateOrphanage = (createData: CreateData) => {
     const data = qs.stringify({
         ...createData
     })
-    return Axios({method: 'POST', baseURL: BASE_URL, url: '/orphanages/insert', data})
+    return Axios({ method: 'POST', baseURL: BASE_URL, url: '/orphanages/insert', data })
 }

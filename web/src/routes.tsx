@@ -17,9 +17,9 @@ function Routes() {
         <Route path="/orphanages/create" component={CreateOrphanage} />
         <Route path="/orphanages/:orfanatoId" component={Orphanage} />
 
-        <Redirect from="/admin/toggle-orphanages" to="/admin/auth" exact/>
+        {/* <Redirect from="/admin/toggle-orphanages" to="/admin/auth" exact/> */}
         <Route from="/admin/auth" component={Auth} />
-        <Route path="/toggle-orphanages" component={ToggleOrphanage} />
+        <Route path="/admin/toggle-orphanages" component={ToggleOrphanage} />
       </Switch>
     </BrowserRouter>
   );

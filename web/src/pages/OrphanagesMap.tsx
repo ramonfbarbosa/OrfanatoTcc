@@ -41,16 +41,15 @@ const OrphanagesMap = () => {
         </header>
 
         <footer>
-          <strong>RIO DE JANEIRO</strong>
+          <strong style={{color: "#212529"}}>RIO DE JANEIRO</strong>
           <span>Rio de Janeiro</span>
         </footer>
 
-        <Link to="/admin/auth" style={{ textDecoration: "none", color: "red" }}>
-          <strong>ADMINISTRADOR </strong>
+        <Link to="/admin/auth" style={{ textDecoration: "none"}}>
+          <strong style={{color: "red"}}>ADMINISTRADOR </strong>
           <FiAlertOctagon
             size={32}
             color="red"
-            style={{ marginBottom: "-9px" }}
           />
         </Link>
       </aside>
