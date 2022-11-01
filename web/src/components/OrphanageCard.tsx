@@ -39,11 +39,11 @@ const OrphanageCard = (orphanage: ToggleOrphanageRequest) => {
     let status;
     let ativar;
 
-    if (!isActive) {
+    if (isActive) {
         status = <h5 className='card-text mb-2 text-muted'>STATUS: DESATIVADO</h5>;
         ativar = <a href="#" className="btn btn-success" onClick={handleClick}>ATIVAR</a>
     }
-    if (isActive) {
+    if (!isActive) {
         status = <h5 className='card-text mb-2 text-muted'>STATUS: ATIVADO</h5>;
         ativar = <a href="#" className="btn btn-danger" onClick={handleClick}>DESATIVAR</a>
     }
@@ -56,8 +56,8 @@ const OrphanageCard = (orphanage: ToggleOrphanageRequest) => {
             <div className='card-body text-center'>
                 <h5 className='card-text mb-2 text-muted'>{orphanage.name}</h5>
                 <h5 className='card-text mb-2 text-muted'>{formatPhoneNumber(orphanage.whatsapp)}</h5>
-                <h5 className='card-text mb-2 text-muted'>Abre as: {orphanage.abreAs}</h5>
-                <h5 className='card-text mb-2 text-muted'>Abre as: {orphanage.fechaAs}</h5>
+                <h5 className='card-text mb-2 text-muted'>Abre às: {orphanage.abreAs}</h5>
+                <h5 className='card-text mb-2 text-muted'>Fecha às: {orphanage.fechaAs}</h5>
                 {status}
                 <Link to={`/orphanages/${orphanage.id}`}>
                     <a className="card-link btn btn-secondary btn-sm">Mais informacoes</a>

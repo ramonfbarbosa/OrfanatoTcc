@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import '../styles/pages/create-orphanage.css';
 import { useForm } from "react-hook-form";
 import Sidebar from "../components/SideBar";
-import { getAuthData, requestBackendLogin, saveAuthData } from "../utils/requests";
+import { requestBackendLogin, saveAuthData } from "../utils/requests";
 import api from "../services/api";
 import { useHistory } from "react-router-dom";
 
@@ -32,7 +32,6 @@ const Auth = () => {
             .post("auth/sign-in", JSON.stringify(loginData))
             .then((res) => {
                 saveAuthData(res.data);
-                const token = getAuthData().token;
                 console.log(res);
                 alert("Logado com sucesso!");
                 history.push("/admin/toggle-orphanages")
