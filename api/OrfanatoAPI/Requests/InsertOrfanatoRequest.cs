@@ -13,7 +13,7 @@ public class InsertOrfanatoRequest
     public string Instructions { get; set; }
     public string OpeningHours { get; set; }
     public bool OpenOnWeekends { get; set; }
-    public List<BlobImagesDTO> Images { get; set; }
+    public List<IFormFile> Images { get; set; }
 
     public InsertOrfanatoRequest() { }
 

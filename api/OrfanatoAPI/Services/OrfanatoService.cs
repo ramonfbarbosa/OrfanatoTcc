@@ -4,6 +4,7 @@ using OrfanatoAPI.Models;
 using OrfanatoAPI.Repositories;
 using OrfanatoAPI.Requests;
 using OrfanatoAPI.Response;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OrfanatoAPI.Services;
 
@@ -55,11 +56,25 @@ public class OrfanatoService : IOrfanatoService
        .Select(x => new OrphanageCardsDTO(x))
        .ToList();
 
+
+    private async Task<string> SaveFile(IFormFile file)
+    {
+        var sourcePath = Environment.SpecialFolder.ApplicationData.ToString();
+        var fileName = Guid.NewGuid().ToString();
+        var path = Path.Join(sourcePath, fileName, ".jpg");
+        using (var source = File.Create(path))
+        {
+            await file.CopyToAsync(source);
+        }
+        return path;
+    }
     public async Task<ValidationResponse<OrfanatoDTO>> InsertAsync(InsertOrfanatoRequest request)
     {
         var orfanato = request.GetEntity();
-        var imagens = request.Images.Select(x => new Image(x)).ToList();
-        orfanato.Imagens = imagens;
+
+        var images = request.Images.Select(async (image) => await SaveFile(image));
+
+        orfanato.Imagens = images;
 
         var orfanatoValidationResult = OrfanatoValidator.Validate(orfanato);
         if (orfanatoValidationResult.IsValid)

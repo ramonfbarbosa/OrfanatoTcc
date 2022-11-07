@@ -32,7 +32,7 @@ public class OrphanagesController : Controller
         Ok(OrfanatoService.GetAllOrphanages());
 
     [HttpPost("insert")]
-    public async Task<IActionResult> InsertOrfanato([FromBody] InsertOrfanatoRequest request)
+    public async Task<IActionResult> InsertOrfanato([FromForm] InsertOrfanatoRequest request)
     {
         try
         {

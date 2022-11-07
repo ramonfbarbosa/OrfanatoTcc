@@ -69,15 +69,15 @@ const CreateOrphanage = () => {
     data.append("latitude", String(latitude));
     data.append("longitude", String(longitude));
     data.append("instructions", instructions);
-    data.append("opening_hours", opening_hours);
+    data.append("OpeningHours", opening_hours);
     data.append("open_on_weekends", String(open_on_weekends));
 
     images.forEach((image) => {
-      data.append("images", image);
+      data.append("Images", image);
     });
 
     await api
-      .post("orphanages/insert", JSON.stringify(Object.fromEntries(data)))
+      .post("orphanages/insert", data)
       .then((res) => {
         console.log(res);
         alert("Orfanato cadastrado com sucesso!");
