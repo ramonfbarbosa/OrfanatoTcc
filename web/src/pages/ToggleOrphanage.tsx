@@ -5,6 +5,7 @@ import OrphanageCard from "../components/OrphanageCard";
 import { BASE_URL } from "../utils/requests";
 import { AxiosRequestConfig } from "axios";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const ToggleOrphanage = () => {
 
@@ -26,7 +27,7 @@ const ToggleOrphanage = () => {
         <main>
             <div className="container my-4">
                 <div>
-                    <h1 style={{color: "#212529"}}>Ative ou desative orfanatos</h1>
+                    <h1 style={{ color: "#212529" }}>Ative ou desative orfanatos</h1>
                 </div>
                 <div className="card text-center">
                     <div className="card-header">
@@ -48,6 +49,15 @@ const ToggleOrphanage = () => {
                                     status={orphanage.status} />
                             );
                         })}
+                    </div>
+                    <div>
+                        <hr />
+                        <br />
+                        <Link to={`/app`}>
+                            <button className="btn btn-outline-primary btn-lg btn-block" style={{ color: "#00000" }}>Clique para voltar ao mapa</button>
+                        </Link>
+                        <br />
+                        <br />
                     </div>
                 </div>
             </div>
