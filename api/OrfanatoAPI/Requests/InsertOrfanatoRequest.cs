@@ -1,5 +1,6 @@
 ﻿using OrfanatoAPI.DTOs;
 using OrfanatoAPI.Models;
+using System.Globalization;
 
 namespace OrfanatoAPI.Requests;
 
@@ -14,7 +15,7 @@ public class InsertOrfanatoRequest
     public string AbreAs { get; set; }
     public string FechaAs { get; set; }
     public string OpenOnWeekends { get; set; }
-    public List<BlobImagesDTO> Images { get; set; }
+    //public List<BlobImagesDTO> Images { get; set; }
 
     public InsertOrfanatoRequest() { }
 
@@ -23,8 +24,8 @@ public class InsertOrfanatoRequest
         {
             Name = Name,
             Whatsapp = Whatsapp,
-            Latitude = decimal.Parse(Latitude),
-            Longitude = decimal.Parse(Longitude),
+            Latitude = decimal.Parse(Latitude, CultureInfo.InvariantCulture),
+            Longitude = decimal.Parse(Longitude, CultureInfo.InvariantCulture),
             About = About,
             Instructions = Instructions,
             AbreAs = AbreAs,

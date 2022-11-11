@@ -4,7 +4,8 @@ import '../styles/components/OrphanageCard.css';
 import { Link } from 'react-router-dom';
 import { ToggleOrphanageRequest } from '../types/ToggleOrphanageRequest';
 import api from '../services/api';
-import { getAuthData, requestBackend } from '../utils/requests';
+import { getAuthData } from '../utils/requests';
+import Swal from 'sweetalert2';
 
 function formatPhoneNumber(phoneNumberString: string) {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
@@ -18,23 +19,31 @@ function formatPhoneNumber(phoneNumberString: string) {
 const HandleClick = (orphanage: ToggleOrphanageRequest) => {
     const config = {
         headers: {
-          Authorization: `Bearer ` + getAuthData().token
+            Authorization: `Bearer ` + getAuthData().token
         }
-      };
-        api
-            .post("orphanage/toggle-orphanage", JSON.stringify({ "id": orphanage.id }), config)
-            .then((res) => {
-                console.log(res)
-                alert("status do orfanato atualizado com sucesso!");
-                document.location.reload()
+    };
+    api
+        .post("orphanage/toggle-orphanage", JSON.stringify({ "id": orphanage.id }), config)
+        .then((res) => {
+            Swal.fire(
+                'Status do orfanato atualizado com sucesso!',
+                '',
+                'success'
+            )
+            setTimeout(function () {
+                window.location.reload();
+            }, 4000);
+        })
+        .catch((error) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Ocorreu um erro inesperado!',
+                text: 'Não foi possivel trocar o status do orfanato!'
             })
-            .catch((error) => {
-                console.log(error);
-            });
+        });
 }
 
 const OrphanageCard = (orphanage: ToggleOrphanageRequest) => {
-    
 
     const isActive = orphanage.status != true
     let status;

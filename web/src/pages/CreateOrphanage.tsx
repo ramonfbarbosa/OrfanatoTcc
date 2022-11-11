@@ -70,7 +70,7 @@ const CreateOrphanage = () => {
         history.push('/app');
       })
       .catch((error) => {
-        console.log(error);
+        swal("Ocorreu algum erro!", "", "error");
       });
   }
 
@@ -79,29 +79,39 @@ const CreateOrphanage = () => {
       return;
     }
     const selectedImages = Array.from(event.target.files);
-
     event.target.value = "";
-
     setImages([...images, ...selectedImages]);
+    let verifyImage;
 
-    const selectedImagesPreview = selectedImages.map((image) => {
-      return { name: image.name, url: URL.createObjectURL(image) };
+    selectedImages.forEach(e => {
+      if (previewImages.length == 0) {
+        verifyImage = true;
+      }
+      else {
+        if (e.name == previewImages[previewImages.length - 1].name) {
+          verifyImage = false;
+        }
+        else {
+          verifyImage = true;
+        }
+      }
     });
 
-    //quando state é um array, usar a notação de spread, criando um novo array com todos os elementos
-    setPreviewImages([...previewImages, ...selectedImagesPreview]);
+    if (verifyImage) {
+      const selectedImagesPreview = selectedImages.map((image) => {
+        return { name: image.name, url: URL.createObjectURL(image) };
+      });
+      //quando state é um array, usar a notação de spread, criando um novo array com todos os elementos
+      setPreviewImages([...previewImages, ...selectedImagesPreview]);
+    }
+    else {
+      swal("Imagem já cadastrada", "", "error");
+    }
   }
 
   function handleRemoveImage(image: PreviewImage) {
-    setPreviewImages([
-      ...previewImages,
-      ...previewImages
-        .map((image) => image)
-        .filter((img) => img.url !== image.url),
-    ]);
-    setImages(
-      images.map((image) => image).filter((img) => img.name !== image.name)
-    );
+    const newPreviewImages = previewImages.filter(e => e.name !== image.name);
+    setPreviewImages([...newPreviewImages]);
   }
 
   return (

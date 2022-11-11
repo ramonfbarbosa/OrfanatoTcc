@@ -1,15 +1,15 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React from "react";
 import '../styles/pages/create-orphanage.css';
 import { useForm } from "react-hook-form";
 import Sidebar from "../components/SideBar";
-import { requestBackendLogin, saveAuthData } from "../utils/requests";
+import { saveAuthData } from "../utils/requests";
 import api from "../services/api";
 import { useHistory } from "react-router-dom";
-import swal from 'sweetalert';
+import Swal from "sweetalert2";
 
 const Auth = () => {
     const history = useHistory();
-    const { register, handleSubmit, formState: {errors} } = useForm<LoginData>();
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginData>();
 
     type LoginData = {
         email: string;
@@ -21,11 +21,18 @@ const Auth = () => {
             .post("auth/sign-in", JSON.stringify(loginData))
             .then((res) => {
                 saveAuthData(res.data);
-                swal("Logado com sucesso!", "","success");
+                Swal.fire(
+                    'Logado com sucesso!',
+                    '',
+                    'success'
+                )
                 history.push("/admin/toggle-orphanages")
             })
             .catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Email ou senha inválidos!'
+                })
             });
     };
 

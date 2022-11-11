@@ -58,8 +58,8 @@ public class OrfanatoService : IOrfanatoService
     public async Task<ValidationResponse<OrfanatoDTO>> InsertAsync(InsertOrfanatoRequest request)
     {
         var orfanato = request.GetEntity();
-        var imagens = request.Images.Select(x => new Image(x)).ToList();
-        orfanato.Imagens = imagens;
+        //var imagens = request.Images.Select(x => new Image(x)).ToList();
+        //orfanato.Imagens = imagens;
 
         var orfanatoValidationResult = OrfanatoValidator.Validate(orfanato);
         if (orfanatoValidationResult.IsValid)
