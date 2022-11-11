@@ -4,7 +4,7 @@ import { Map, Marker, TileLayer } from "react-leaflet";
 import { FiPlus, FiX } from "react-icons/fi";
 import { LeafletMouseEvent } from "leaflet";
 import swal from 'sweetalert';
-
+import PhoneInput from 'react-phone-number-input/input';
 import api from "../services/api";
 
 import Sidebar from "../components/SideBar";
@@ -154,11 +154,11 @@ const CreateOrphanage = () => {
 
               <div className="input-block col-12">
                 <label htmlFor="whatsapp">Whatsapp</label>
-                <input
-                  id="whatsapp"
+                <PhoneInput
                   value={whatsapp}
-                  onChange={(event) => setWhatsapp(event.target.value)}
-                />
+                  onChange={(event) => setWhatsapp}
+                  defaultCountry="BR"
+                  maxLength={15} />
               </div>
 
               <div className="input-block col-12">
