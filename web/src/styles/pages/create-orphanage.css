@@ -4,6 +4,7 @@
 
 #page-create-orphanage main {
   flex: 1;
+  overflow: hidden;
 }
 
 form.create-orphanage-form {

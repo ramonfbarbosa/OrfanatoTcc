@@ -125,7 +125,7 @@ const CreateOrphanage = () => {
               <legend>Dados</legend>
 
               <Map
-                center={[-22.9035, -43.2096]}
+                center={[-23.020463, -43.475536]}
                 style={{ width: "100%", height: 280 }}
                 zoom={15}
                 onclick={handleMapClick}

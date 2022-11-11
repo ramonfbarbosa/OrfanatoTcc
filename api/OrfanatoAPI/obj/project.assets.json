@@ -7640,11 +7640,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ramon\\Desktop\\OrfanatoTcc\\api\\OrfanatoAPI\\OrfanatoAPI.csproj",
+      "projectUniqueName": "C:\\Users\\ramon\\Documents\\projects\\OrfanatoTcc\\api\\OrfanatoAPI\\OrfanatoAPI.csproj",
       "projectName": "OrfanatoAPI",
-      "projectPath": "C:\\Users\\ramon\\Desktop\\OrfanatoTcc\\api\\OrfanatoAPI\\OrfanatoAPI.csproj",
+      "projectPath": "C:\\Users\\ramon\\Documents\\projects\\OrfanatoTcc\\api\\OrfanatoAPI\\OrfanatoAPI.csproj",
       "packagesPath": "C:\\Users\\ramon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ramon\\Desktop\\OrfanatoTcc\\api\\OrfanatoAPI\\obj\\",
+      "outputPath": "C:\\Users\\ramon\\Documents\\projects\\OrfanatoTcc\\api\\OrfanatoAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ramon\\AppData\\Roaming\\NuGet\\NuGet.Config",
